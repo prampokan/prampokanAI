@@ -17,10 +17,9 @@ function App() {
       setIsLoading(false);
     }, 2000);
   };
-  
 
   return (
-   <main className="flex flex-col justify-center font-poppins h-screen bg-neutral-100">
+   <main className="flex flex-col justify-center font-poppins h-screen bg-neutral-50">
       <div className="h-14 absolute top-0 shadow-sm w-full flex justify-center items-center bg-white lg:px-0 px-5">
         <div className="w-[50rem] flex items-center justify-between">
           <h1 className='text-xl font-bold text-neutral-700 cursor-pointer'><a href="/">🚀Tekkom AI</a></h1>
@@ -41,7 +40,7 @@ function App() {
           }
         </div>
       </div>
-      <div className="absolute bottom-0 pb-14 w-full flex justify-center h-14 items-center bg-neutral-100 lg:px-0 px-5">
+      <div className="absolute bottom-0 pb-14 w-full flex justify-center h-14 items-center bg-neutral-50 lg:px-0 px-5">
         <div className="w-[50rem]">
         <form
           onSubmit={handleSubmit} 
@@ -55,7 +54,7 @@ function App() {
             autoComplete="off"
           />
           <button 
-            className="rounded-full bg-slate-100 h-10 w-10 flex items-center justify-center text-neutral-700 hover:bg-neutral-300 transition-all"
+            className="rounded-full bg-neutral-100 h-10 w-10 flex items-center justify-center text-neutral-700 hover:bg-neutral-300 transition-all"
             type="button"
             onClick={handleSubmit} 
           >
