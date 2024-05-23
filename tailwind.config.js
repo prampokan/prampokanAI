@@ -9,8 +9,15 @@ export default {
       fontFamily: {
         poppins: ['"Poppins"']
       },
+      colors: {
+        dark: {
+          DEFAULT: '#121212',
+          SECONDARY: '#1c1c1c',
+        },
+      },
     },
   },
   plugins: [],
+  darkMode: 'class',
 }
 
