@@ -67,17 +67,19 @@ function App() {
           </div>
         </div>
         <div className="flex justify-center overflow-auto lg:px-0 px-5">
-          <div className="w-[45rem] h-full text-center py-20">
-            {data ? 
-            <SyntaxHighlight language="swift" style={darcula} wrapLongLines={true}>
-              {data}
-            </SyntaxHighlight>
-            : <h1 className={`${isLoading ? "animate-pulse" : ""} select-none text-3xl md:text-7xl font-black opacity-10 dark:text-zinc-500`}>🚀Tekkom AI</h1>
-            }
+          <div className="w-[45rem] h-full text-center">
+            <div className="pt-20 pb-32">
+              {data ? 
+              <SyntaxHighlight language="swift" style={darcula} wrapLongLines={true}>
+                {data}
+              </SyntaxHighlight>
+              : <h1 className={`${isLoading ? "animate-pulse" : ""} select-none text-3xl md:text-7xl font-black opacity-10 dark:text-zinc-500`}>🚀Tekkom AI</h1>
+              }
+            </div>
           </div>
         </div>
         <div className="absolute bottom-0 pb-14 w-full flex flex-col justify-center h-14 items-center bg-zinc-50 dark:bg-dark lg:px-0 px-5">
-          <div className="w-[50rem]">
+          <div className="w-full lg:w-[50rem]">
           <form
             onSubmit={handleSubmit} 
             className="w-full bg-white dark:bg-zinc-900 h-14 pl-7 pr-3 py-2 flex justify-between rounded-full shadow-sm"
@@ -85,7 +87,7 @@ function App() {
             <input 
               type="text" 
               id="content" 
-              className="w-full outline-none dark:bg-zinc-900 dark:text-zinc-100" 
+              className="w-full outline-none dark:bg-zinc-900 dark:text-zinc-100 pr-4" 
               placeholder="Kirim pesan ke Tekkom AI"
               autoComplete="off"
             />
@@ -113,7 +115,7 @@ function App() {
             </button>
           </form>
           </div>
-          <h1 className="text-sm mt-3 text-zinc-300 dark:text-zinc-700">Built with React and GroqAI by <a href="https://pramudya-diagusta.vercel.app/" target="_blank">Pramudya Diagusta</a></h1>
+          <h1 className="mt-3 text-zinc-300 dark:text-zinc-700 text-[10px] sm:text-sm">Built with React and GroqAI by <a href="https://pramudya-diagusta.vercel.app/" target="_blank">Pramudya Diagusta</a></h1>
         </div>
     </main>
    </div>
