@@ -1,13 +1,14 @@
 import { requestToGroqAI } from "./utils/groq"
 import { useState, useEffect, useRef } from "react";
 import {Light as SyntaxHighlight} from "react-syntax-highlighter"
-import { darcula } from "react-syntax-highlighter/dist/cjs/styles/prism"
+import { darcula, oneLight } from "react-syntax-highlighter/dist/cjs/styles/prism"
 import { TailSpin } from 'react-loader-spinner'
 import Switch from "./components/switch";
 import Bar from "./components/bar";
 
 function App() {
   const [data, setData] = useState("")
+  const [query, setQuery] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [open, setOpen] = useState(false)
   const [darkMode, setDarkMode] = useState(false)
@@ -25,12 +26,14 @@ function App() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setQuery(content.value);
     setIsLoading(true);
     setTimeout(async () => {
       const ai = await requestToGroqAI(content.value);
@@ -40,7 +43,7 @@ function App() {
   };
 
   return (
-  <div className={`${darkMode && "dark"}`}>
+  <div className={`${darkMode && "dark"}`} >
     <main className="flex flex-col justify-center font-poppins h-screen bg-zinc-50 dark:bg-dark">
         <div className="h-14 absolute top-0 shadow-sm w-full flex justify-center items-center bg-white dark:bg-zinc-900 lg:px-0 px-5">
           <div className="w-[50rem] flex items-center justify-between">
@@ -48,10 +51,10 @@ function App() {
             <div className="relative flex flex-col" ref={divRef}>
               <Bar onclick={() => setOpen(!open)}/>
               <div
-                className={`${open ? "opacity-100 translate-y-5 -translate-x-2" : ""} shadow-sm rounded-md p-2 w-44 opacity-0 bg-white dark:bg-zinc-900 absolute top-8 right-0 transition-all flex flex-col gap-2`}
+                className={`${open ? "opacity-100 translate-y-5 -translate-x-2" : "invisible"} shadow-sm rounded-md p-2 w-44 opacity-0 bg-white dark:bg-zinc-900 absolute top-8 right-0 transition-all flex flex-col gap-2 z-99`}
               >
                 <a href="https://github.com/prampokan/prampokanAI" target="_blank" className="flex justify-between dark:text-zinc-100 text-zinc-700 dark:bg-dark px-2 py-3 bg-zinc-50 rounded-md items-center shadow-inner cursor-pointer transition-all hover:bg-zinc-100">
-                    <h1 className='font-medium text-sm '>Go to code</h1>
+                    <h1 className='font-medium text-sm '>Github</h1>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
                         <path fillRule="evenodd" d="M14.447 3.026a.75.75 0 0 1 .527.921l-4.5 16.5a.75.75 0 0 1-1.448-.394l4.5-16.5a.75.75 0 0 1 .921-.527ZM16.72 6.22a.75.75 0 0 1 1.06 0l5.25 5.25a.75.75 0 0 1 0 1.06l-5.25 5.25a.75.75 0 1 1-1.06-1.06L21.44 12l-4.72-4.72a.75.75 0 0 1 0-1.06Zm-9.44 0a.75.75 0 0 1 0 1.06L2.56 12l4.72 4.72a.75.75 0 0 1-1.06 1.06L.97 12.53a.75.75 0 0 1 0-1.06l5.25-5.25a.75.75 0 0 1 1.06 0Z" clipRule="evenodd" />
                     </svg>
@@ -66,14 +69,21 @@ function App() {
             </div>
           </div>
         </div>
-        <div className="flex justify-center overflow-auto lg:px-0 px-5">
+        <div className="flex justify-center overflow-auto lg:px-0 px-5 scrollbar-thin">
           <div className="w-[45rem] h-full text-center">
             <div className="pt-20 pb-32">
-              {data ? 
-              <SyntaxHighlight language="swift" style={darcula} wrapLongLines={true}>
+              {query && 
+                <div className="flex justify-end">
+                  <div className={`bg-zinc-200 leading-loose dark:bg-zinc-800 dark:text-white py-2 px-5 rounded-[25px] shadow-sm mb-2 text-left ml-10`}>
+                    {query}
+                  </div>
+                </div>
+              }
+              {data && !isLoading ? 
+              <SyntaxHighlight language="swift" style={darkMode === true ? darcula : oneLight} wrapLongLines={true}>
                 {data}
               </SyntaxHighlight>
-              : <h1 className={`${isLoading ? "animate-pulse" : ""} select-none text-3xl md:text-7xl font-black opacity-10 dark:text-zinc-500`}>🚀Tekkom AI</h1>
+              : <h1 className={`${isLoading ? "hidden" : ""} select-none text-3xl md:text-7xl font-black opacity-10 dark:text-zinc-500`}>🚀Tekkom AI</h1>
               }
             </div>
           </div>
